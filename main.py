@@ -1,19 +1,13 @@
 import sys
 
+# import screen size utility module that helps us scale the "forest" based on device screen size
+import pyautogui
+
 import cv2 as cv
 import numpy as np
 
-# general parameters
-width = 900
-height = 600
-n_trees = 30
-ground_level = height - 100
-
 # colours
 green, light_green, brown = (40, 185, 40), (25, 220, 0), (30, 65, 155)
-
-# blank image
-bg = np.zeros((height, width, 3), dtype=np.uint8)
 
 
 @staticmethod
@@ -22,8 +16,42 @@ def get_python_version() -> str:
 
 
 # Press the green button in the gutter to run the script.
+def scaleBackground(width, height):
+    # calculate size as a percentage of device screen size
+    device_width, device_height = pyautogui.size()
+    screenPct: float = float(2.0 / 3.0)
+
+    game_width: int = int((device_width * screenPct // 100) * 100)
+    game_height: int = int((device_height * screenPct // 100) * 100)
+
+    scaleFactor = device_width / device_height + screenPct
+    print(f'scale factor = {scaleFactor}')
+    w = game_width  # 1200
+    h = game_height  # 800
+
+    return w, h
+
+
 if __name__ == '__main__':
     print(f'Python version {get_python_version()}')
+
+    # general parameters
+    width = 900
+    height = 600
+    n_trees = 30
+
+    # scale the size of the background base on device size
+    print(f'before: width={width}, height={height}')
+    w, h = scaleBackground(width, height)
+    width = w
+    height = h
+    print(f'after: width={width}, height={height}')
+
+    ground_level = height - 100
+
+    # blank image
+    bg = np.zeros((height, width, 3), dtype=np.uint8)
+
     # draw background
     cv.rectangle(bg, (width, 0), (0, ground_level), (255, 225, 95), -1)
     cv.rectangle(bg, (width, ground_level), (0, height), green, -1)
