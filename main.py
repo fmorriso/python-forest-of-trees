@@ -16,20 +16,16 @@ def get_python_version() -> str:
 
 
 # Press the green button in the gutter to run the script.
-def scaleBackground(width, height):
-    # calculate size as a percentage of device screen size
+def scaleBackground(screenPct: float) -> tuple[int, int]:
+    # find out the width and height of the device we are running on
     device_width, device_height = pyautogui.size()
-    screenPct: float = float(85.0 / 100.0)
 
-    game_width: int = int((device_width * screenPct // 100) * 100)
-    game_height: int = int((device_height * screenPct // 100) * 100)
+    # scale width and height based on what percentage of device size user wants to use, rounded to
+    # the nearest multiple of 100
+    scaledWidth: int = int((device_width * screenPct // 100) * 100)
+    scaledHeight: int = int((device_height * screenPct // 100) * 100)
 
-    scaleFactor = device_width / device_height + screenPct
-    print(f'scale factor = {scaleFactor}')
-    w = game_width  # 1200
-    h = game_height  # 800
-
-    return w, h
+    return scaledWidth, scaledHeight
 
 
 if __name__ == '__main__':
@@ -42,9 +38,7 @@ if __name__ == '__main__':
 
     # scale the size of the background base on device size
     print(f'before: width={width}, height={height}')
-    w, h = scaleBackground(width, height)
-    width = w
-    height = h
+    width, height = scaleBackground(0.75)
     print(f'after: width={width}, height={height}')
 
     ground_level = height - 100
