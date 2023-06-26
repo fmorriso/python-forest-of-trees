@@ -32,14 +32,11 @@ if __name__ == '__main__':
     print(f'Python version {get_python_version()}')
 
     # general parameters
-    width = 900
-    height = 600
     n_trees = 30
 
-    # scale the size of the background base on device size
-    print(f'before: width={width}, height={height}')
+    # scale the size of the background based on device size
     width, height = scaleBackground(0.75)
-    print(f'after: width={width}, height={height}')
+    print(f'scaled: width={width}, height={height}')
 
     ground_level = height - 100
 
