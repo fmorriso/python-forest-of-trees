@@ -19,7 +19,7 @@ def get_python_version() -> str:
 def scaleBackground(width, height):
     # calculate size as a percentage of device screen size
     device_width, device_height = pyautogui.size()
-    screenPct: float = float(2.0 / 3.0)
+    screenPct: float = float(85.0 / 100.0)
 
     game_width: int = int((device_width * screenPct // 100) * 100)
     game_height: int = int((device_height * screenPct // 100) * 100)
