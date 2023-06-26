@@ -15,6 +15,7 @@ def get_python_version() -> str:
     return f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}'
 
 
+@staticmethod
 def scaleBackground(screenPct: float) -> tuple[int, int]:
     # find out the width and height of the device we are running on
     device_width, device_height = pyautogui.size()
