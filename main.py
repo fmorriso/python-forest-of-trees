@@ -54,10 +54,7 @@ if __name__ == '__main__':
     forest.draw_sky()
 
     # ground
-    x1, y1 = 0, height - forest.ground_level
-    x2, y2 = width, height
-    cv.rectangle(bg, (x1, y1), (x2, y2), forest.groundColor, forest.groundThickness)
-
+    forest.draw_ground()
 
     # display image
     cv.imshow('forest of objects', bg)
