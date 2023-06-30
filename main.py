@@ -43,9 +43,22 @@ if __name__ == '__main__':
     # blank image
     bg = np.zeros((height, width, 3), dtype=np.uint8)
 
-    # draw background
-    cv.rectangle(bg, (width, 0), (0, ground_level), (255, 225, 95), -1)
-    cv.rectangle(bg, (width, ground_level), (0, height), green, -1)
+    # sky
+    x1, y1 = 0, 0
+    # allow for future ground by reserving a percentage of the total height
+    groundHeight: int = int(height * 0.15 * 10 / 10)
+    x2, y2 = width, height - groundHeight
+    print(f'ground height={groundHeight}, y2={y2}')
+    skyColor = (255, 255, 85)  # BGR, not RGB
+    skyLineThickness = -1  # fill without a border
+    cv.rectangle(bg, (x1, y1), (x2, y2), skyColor, skyLineThickness)
+
+    # ground
+    x1, y1 = 0, height - groundHeight
+    x2, y2 = width, height
+    groundColor = (75, 180, 70)
+    groundThickness = -1
+    cv.rectangle(bg, (x1, y1), (x2, y2), groundColor, groundThickness)
 
     # ***************
     # YOUR CODE GOES HERE

@@ -7,4 +7,4 @@
 ## Issues 
 * ```import cv2 as cv``` fails during pip install on 2023-06-26
     solution: ```pip install opencv-python``` which installs version 4.7
-* 
+* ****
