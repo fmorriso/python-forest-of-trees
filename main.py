@@ -40,15 +40,11 @@ if __name__ == '__main__':
     width, height = scaleBackground(0.75)
     print(f'scaled: width={width}, height={height}')
 
-    # blank image
+    # blank, scaled image
     bg = np.zeros((height, width, 3), dtype=np.uint8)
 
-    # create a forest and tell it how big it should be
-    forest = Forest(bg, width, height)
-
-
-    print(f'shape={bg.shape}') # rows/height, columns/width, dimensions
-    print(f'rows/height={bg.shape[0]}')
+    # create a forest by passing the scaled, empty image to the constructor
+    forest = Forest(bg)
 
     # sky
     forest.draw_sky()
