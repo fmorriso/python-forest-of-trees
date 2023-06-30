@@ -36,7 +36,7 @@ if __name__ == '__main__':
     # general parameters
     n_trees = 30
 
-    # scale the size of the background based on device size
+    # scale the size of the background to a percentage of the device size
     width, height = scaleBackground(0.75)
     print(f'scaled: width={width}, height={height}')
 
