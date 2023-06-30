@@ -40,19 +40,18 @@ if __name__ == '__main__':
     width, height = scaleBackground(0.75)
     print(f'scaled: width={width}, height={height}')
 
-    # create a forest and tell it how big it should be
-    forest = Forest(width, height)
-
     # blank image
     bg = np.zeros((height, width, 3), dtype=np.uint8)
+
+    # create a forest and tell it how big it should be
+    forest = Forest(bg, width, height)
+
+
     print(f'shape={bg.shape}') # rows/height, columns/width, dimensions
     print(f'rows/height={bg.shape[0]}')
 
     # sky
-    x1, y1 = 0, 0
-    x2, y2 = width, height - forest.ground_level
-    print(f'ground level={forest.ground_level}, y2={y2}')
-    cv.rectangle(bg, (x1, y1), (x2, y2), forest.skyColor, forest.skyLineThickness)
+    forest.draw_sky()
 
     # ground
     x1, y1 = 0, height - forest.ground_level
