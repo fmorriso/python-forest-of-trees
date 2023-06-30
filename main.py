@@ -6,6 +6,8 @@ import pyautogui
 import cv2 as cv
 import numpy as np
 
+from forest import Forest
+
 # colours
 green, light_green, brown = (40, 185, 40), (25, 220, 0), (30, 65, 155)
 
@@ -38,31 +40,25 @@ if __name__ == '__main__':
     width, height = scaleBackground(0.75)
     print(f'scaled: width={width}, height={height}')
 
-    ground_level = height - 100
+    # create a forest and tell it how big it should be
+    forest = Forest(width, height)
 
     # blank image
     bg = np.zeros((height, width, 3), dtype=np.uint8)
+    print(f'shape={bg.shape}') # rows/height, columns/width, dimensions
+    print(f'rows/height={bg.shape[0]}')
 
     # sky
     x1, y1 = 0, 0
-    # allow for future ground by reserving a percentage of the total height
-    groundHeight: int = int(height * 0.15 * 10 / 10)
-    x2, y2 = width, height - groundHeight
-    print(f'ground height={groundHeight}, y2={y2}')
-    skyColor = (255, 255, 85)  # BGR, not RGB
-    skyLineThickness = -1  # fill without a border
-    cv.rectangle(bg, (x1, y1), (x2, y2), skyColor, skyLineThickness)
+    x2, y2 = width, height - forest.ground_level
+    print(f'ground level={forest.ground_level}, y2={y2}')
+    cv.rectangle(bg, (x1, y1), (x2, y2), forest.skyColor, forest.skyLineThickness)
 
     # ground
-    x1, y1 = 0, height - groundHeight
+    x1, y1 = 0, height - forest.ground_level
     x2, y2 = width, height
-    groundColor = (75, 180, 70)
-    groundThickness = -1
-    cv.rectangle(bg, (x1, y1), (x2, y2), groundColor, groundThickness)
+    cv.rectangle(bg, (x1, y1), (x2, y2), forest.groundColor, forest.groundThickness)
 
-    # ***************
-    # YOUR CODE GOES HERE
-    # ***************
 
     # display image
     cv.imshow('forest of objects', bg)
