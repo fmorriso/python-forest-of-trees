@@ -52,7 +52,8 @@ if __name__ == '__main__':
     forest.draw_background()
 
     # trees
-    forest.bg = Tree(forest, bg, 0.50).draw()
+    #forest.bg = Tree(forest, bg, 0.50).draw()
+    forest.draw_tree( Tree(bg, 0.50) )
 
     # display image
     cv.imshow('forest of objects', bg)

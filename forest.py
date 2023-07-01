@@ -1,5 +1,8 @@
+# import numpy as np
 import cv2 as cv
-import numpy as np
+from numpy import ndarray
+
+from tree import Tree
 
 
 class Forest:
@@ -36,3 +39,10 @@ class Forest:
     def draw_background(self):
         self._draw_sky()
         self._draw_ground()
+
+    def draw_tree(self, tree: Tree):
+        # trunk
+        x1 = x2 = tree.loc
+        y1 = self.height - self.ground_level  # bottom of line/trunk
+        y2 = y1 - tree.ht
+        cv.line(self.bg, (x1, y1), (x2, y2), self.brown, tree.trunk_thickness)
