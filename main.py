@@ -5,8 +5,10 @@ import pyautogui
 
 import cv2 as cv
 import numpy as np
+from numpy import ndarray
 
 from forest import Forest
+from tree import Tree
 
 # colours
 green, light_green, brown = (40, 185, 40), (25, 220, 0), (30, 65, 155)
@@ -24,24 +26,24 @@ def scaleBackground(screenPct: float) -> tuple[int, int]:
 
     # scale width and height based on what percentage of device size user wants to use, rounded to
     # the nearest multiple of 100
-    scaledWidth: int = int((device_width * screenPct // 100) * 100)
-    scaledHeight: int = int((device_height * screenPct // 100) * 100)
+    scaled_width: int = int((device_width * screenPct // 100) * 100)
+    scaled_height: int = int((device_height * screenPct // 100) * 100)
 
-    return scaledWidth, scaledHeight
+    return scaled_width, scaled_height
 
 
 if __name__ == '__main__':
     print(f'Python version {get_python_version()}')
 
     # general parameters
-    n_trees = 30
+    n_trees: int = 30
 
     # scale the size of the background to a percentage of the device size
     width, height = scaleBackground(0.75)
     print(f'scaled: width={width}, height={height}')
 
     # blank, scaled image
-    bg = np.zeros((height, width, 3), dtype=np.uint8)
+    bg: ndarray = np.zeros((height, width, 3), dtype=np.uint8)
 
     # create a forest by passing the scaled, empty image to the constructor
     forest = Forest(bg)
@@ -51,6 +53,10 @@ if __name__ == '__main__':
 
     # ground
     forest.draw_ground()
+
+    # tree
+    tree = Tree(forest, bg, 0.50)  # half way across the forest
+    forest.bg = tree.draw()
 
     # display image
     cv.imshow('forest of objects', bg)

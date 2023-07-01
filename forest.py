@@ -1,14 +1,17 @@
 import cv2 as cv
 import numpy as np
 
+
 class Forest:
+    green, light_green, brown = (40, 185, 40), (25, 220, 0), (30, 65, 155)
+
     def __init__(self, image):
         self.bg = image
         print(f'shape={self.bg.shape}')  # rows/height, columns/width, dimensions
         print(f'rows/height={self.bg.shape[0]}')
         print(f'columns/width={self.bg.shape[1]}')
-        self.width = image.shape[1] # width
-        self.height = image.shape[0] # height
+        self.width = image.shape[1]  # width
+        self.height = image.shape[0]  # height
 
         # ground
         self.ground_level = int(self.height * 0.15 * 10 / 10)
