@@ -22,13 +22,17 @@ class Forest:
         self.skyColor = (255, 255, 85)  # BGR, not RGB
         self.sky_line_thickness = -1
 
-    def draw_sky(self):
+    def _draw_sky(self):
         x1, y1 = 0, 0
         x2, y2 = self.width, self.height - self.ground_level
         print(f'ground level={self.ground_level}, y2={y2}')
         cv.rectangle(self.bg, (x1, y1), (x2, y2), self.skyColor, self.sky_line_thickness)
 
-    def draw_ground(self):
+    def _draw_ground(self):
         x1, y1 = 0, self.height - self.ground_level
         x2, y2 = self.width, self.height
         cv.rectangle(self.bg, (x1, y1), (x2, y2), self.ground_color, self.ground_line_thickness)
+
+    def draw_background(self):
+        self._draw_sky()
+        self._draw_ground()

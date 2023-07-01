@@ -48,15 +48,11 @@ if __name__ == '__main__':
     # create a forest by passing the scaled, empty image to the constructor
     forest = Forest(bg)
 
-    # sky
-    forest.draw_sky()
+    # background
+    forest.draw_background()
 
-    # ground
-    forest.draw_ground()
-
-    # tree
-    tree = Tree(forest, bg, 0.50)  # half way across the forest
-    forest.bg = tree.draw()
+    # trees
+    forest.bg = Tree(forest, bg, 0.50).draw()
 
     # display image
     cv.imshow('forest of objects', bg)
